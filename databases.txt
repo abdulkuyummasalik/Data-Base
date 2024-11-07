@@ -1,0 +1,85 @@
+----- Kamis, 17 Oktober 2024 -----
+
+-- Agregasi => Menghitung --
+COUNT => 🡪 SELECT COUNT(field) FROM namatabel;
+SUM => 🡪 SELECT SUM(field) FROM namatabel;
+MIN => 🡪 SELECT MIN(field) FROM namatabel;
+MAX => 🡪 SELECT MAX(field) FROM namatabel;
+AVG => 🡪 SELECT AVG(field) FROM namatabel;
+ROUND => 🡪 SELECT ROUND(field) FROM namatabel;
+
+
+-- Join => Mengabungkan / Gabungan / Gabung --
+1. Inner Join => Data harus ada dan datanya sama
+
+Cara Biasa =>
+SELECT ms_kategori.nama_kategori, ms_produk.nama_produk FROM ms_kategori, ms_produk
+WHERE ms_kategori.kode_kategori=ms_produk.kode_kategori
+
+Cara Inner Join =>
+SELECT ms_kategori.nama_kategori, ms_produk.nama_produk
+FROM ms_kategori INNER JOIN ms_produk
+ON ms_kategori.kode_kategori=ms_produk.kode_kategori
+
+TASK
+1. Tampilkan nama_propinsi, nama_kota menggunakan SELECT FROM WHERE
+
+SELECT ms_propinsi.nama_propinsi, ms_kota.nama_kota
+FROM ms_propinsi, ms_kota
+WHERE ms_propinsi.kode_propinsi = ms_kota.kode_propinsi;
+
+2. Tampilkan nama_propinsi, nama_kota menggunakan 
+INNER JOIN
+
+SELECT ms_propinsi.nama_propinsi, ms_kota.nama_kota
+FROM ms_propinsi INNER JOIN ms_kota
+ON ms_propinsi.kode_propinsi = ms_kota.kode_propinsi;
+
+3. Tampilkan nama_propinsi, nama_kota, nama_cabang  menggunakan SELECT FROM WHERE
+
+SELECT ms_propinsi.nama_propinsi, ms_kota.nama_kota, ms_cabang.nama_cabang
+FROM ms_propinsi, ms_kota, ms_cabang
+WHERE ms_propinsi.kode_propinsi = ms_kota.kode_propinsi
+AND ms_kota.kode_kota = ms_cabang.kode_kota;
+
+4. Tampilkan nama_propinsi, nama_kota, nama_cabang  menggunakan INNER JOIN
+
+SELECT ms_propinsi.nama_propinsi, ms_kota.nama_kota, ms_cabang.nama_cabang
+FROM ms_propinsi INNER JOIN ms_kota INNER JOIN ms_cabang
+ON ms_propinsi.kode_propinsi = ms_kota.kode_propinsi
+AND ms_kota.kode_kota = ms_cabang.kode_kota;
+
+SELECT ms_propinsi.nama_propinsi, ms_kota.nama_kota, ms_cabang.nama_cabang
+FROM ms_propinsi
+INNER JOIN ms_kota ON ms_propinsi.kode_propinsi = ms_kota.kode_propinsi
+INNER JOIN ms_cabang ON ms_kota.kode_kota = ms_cabang.kode_kota;
+
+
+1. Bagaimana supaya kita tahu karyawan itu kerja di cabang mana?
+SELECT nama_depan, nama_belakang, nama_cabang
+FROM ms_karyawan INNER JOIN ms_cabang
+ON ms_karyawan.kode_cabang=ms_cabang.kode_cabang
+
+2. Bagaimana supaya kita tahu karyawan itu kerja di cabang mana, kota mana, propinsi mana?
+SELECT nama_depan, nama_belakang, nama_cabang, nama_kota,nama_propinsi
+FROM ms_karyawan
+INNER JOIN ms_cabang ON ms_karyawan.kode_cabang = ms_cabang.kode_cabang
+INNER JOIN ms_kota ON ms_cabang.kode_kota = ms_kota.kode_kota
+INNER JOIN ms_propinsi ON ms_kota.kode_propinsi = ms_propinsi.kode_propinsi
+
+3. Buat / buat Query / hasilnya
+CREATE VIEW data_karyawan AS
+SELECT nama_depan, nama_belakang, nama_cabang, nama_kota,nama_propinsi
+FROM ms_karyawan
+INNER JOIN ms_cabang ON ms_karyawan.kode_cabang = ms_cabang.kode_cabang
+INNER JOIN ms_kota ON ms_cabang.kode_kota = ms_kota.kode_kota
+INNER JOIN ms_propinsi ON ms_kota.kode_propinsi = ms_propinsi.kode_propinsi
+
+
+
+
+2. Outer Join => 
+  - Left Join
+  - Right Join
+
+
