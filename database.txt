@@ -1,0 +1,121 @@
+-- Rabu, 2 Oktober 2024
+
+-- Jalankan MySQL Database
+mysql - u root - p;
+
+-- Menampilkan Semua Database
+SHOW DATABASES;
+
+-- Memilih Database yang Akan Digunakan
+USE nama_database;
+
+-- Menampilkan Semua Tabel di Dalam Database
+SHOW TABLES;
+
+-- Menampilkan Struktur Tabel (Deskripsi)
+DESC nama_tabel;
+
+-- SELECT Statements
+
+-- 1. Menampilkan Semua Data dalam Tabel
+SELECT * FROM nama_tabel;
+
+-- 2. Mencari Data Spesifik dalam Tabel
+SELECT * FROM ms_karyawan WHERE nama_kolom = "nilai_yang_dicari";
+
+-- 3. Mencari Data Spesifik dengan Urutan (ASC/DESC)
+-- ASC = A-Z atau 1-10
+-- DESC = Z-A atau 10-1
+SELECT *
+FROM ms_karyawan
+WHERE
+    nama_kolom = "nilai_yang_dicari"
+ORDER BY nama_kolom ASC;
+
+-- 4. Menampilkan Kolom Tertentu
+SELECT kolom1, kolom2 FROM nama_tabel ORDER BY kolom1 ASC;
+
+-- 5. Mencari Data dengan Karakter Khusus Menggunakan LIKE
+-- "a%" => Awalan huruf 'A'
+-- "%a" => Akhiran huruf 'A'
+-- "%B%" => Mengandung huruf 'B'
+SELECT * FROM nama_tabel WHERE nama_kolom LIKE "%B%";
+
+-- 6. Mencari Data dengan Kondisi NULL dan NOT NULL
+SELECT * FROM nama_tabel WHERE nama_kolom IS NULL;
+
+-- CREATE Statements
+
+-- Membuat Database
+CREATE DATABASE nama_database;
+
+-- Membuat Tabel
+CREATE TABLE nama_tabel (
+    kolom1 VARCHAR(10) PRIMARY KEY,
+    kolom2 VARCHAR(100),
+    kolom3 VARCHAR(3)
+);
+
+-- Contoh Membuat Tabel
+CREATE TABLE ms_cabang (
+    kode_cabang VARCHAR(10) PRIMARY KEY,
+    nama_cabang VARCHAR(100),
+    kode_kota VARCHAR(3)
+);
+
+-- INSERT Statements
+
+-- Cara 1: Menambahkan Satu Baris Data
+INSERT INTO nama_tabel VALUES ('value1', 'value2');
+
+-- Contoh: Menambahkan Satu Baris Data ke Tabel ms_kategori
+INSERT INTO ms_kategori VALUES ('KTG-004', 'Elektronik');
+
+-- Cara 2: Menambahkan Data dengan Menyebutkan Kolom
+INSERT INTO nama_tabel (kolom1, kolom2) VALUES ('value1', 'value2');
+
+-- Contoh: Menambahkan Data ke Tabel ms_kategori
+INSERT INTO
+    ms_kategori (kode_kategori, nama_kategori)
+VALUES ('KTG-005', 'Interior');
+
+-- Cara 3: Menambahkan Banyak Baris Data Sekaligus
+INSERT INTO
+    nama_tabel (kolom1, kolom2)
+VALUES ('value1', 'value2'),
+    ('value3', 'value4'),
+    ('value5', 'value6');
+
+-- Contoh: Menambahkan Banyak Data Sekaligus ke Tabel ms_kategori
+INSERT INTO
+    ms_kategori (kode_kategori, nama_kategori)
+VALUES ('KTG-006', 'Makanan'),
+    ('KTG-007', 'Minuman'),
+    (
+        'KTG-008',
+        'Peralatan Rumah Tangga'
+    );
+
+-- UPDATE Statements
+
+-- Mengubah Data dalam Tabel
+UPDATE nama_tabel
+SET
+    kolom1 = "nilai_baru"
+WHERE
+    kolom2 = "nilai_acuan";
+
+-- Contoh: Mengubah Data dalam Tabel ms_kategori
+UPDATE ms_kategori
+SET
+    nama_kategori = "Buah-buahan"
+WHERE
+    kode_kategori = "KTG-005";
+
+-- DELETE Statements
+
+-- Menghapus Data dari Tabel
+DELETE FROM nama_tabel WHERE nama_kolom = "nilai_yang_dihapus";
+
+-- Contoh: Menghapus Data dari Tabel ms_kategori
+DELETE FROM ms_kategori WHERE nama_kategori = "Interior";
